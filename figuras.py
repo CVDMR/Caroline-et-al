@@ -71,6 +71,11 @@ def mostra(fig, nome: str | None = None) -> None:
         nome, i = f"{base}_{i}", i + 1
     _registro.append((nome, fig))
 
+    # margens automáticas: rótulos longos dos eixos não são cortados nem
+    # ficam sobrepostos ao título do eixo (vale para a tela, PNG e HTML)
+    fig.update_xaxes(automargin=True)
+    fig.update_yaxes(automargin=True, title_standoff=18)
+
     st.plotly_chart(
         fig, width="stretch", key=f"fig_{_contador}",
         config={"toImageButtonOptions": {"format": "png", "filename": nome, "scale": 3}},

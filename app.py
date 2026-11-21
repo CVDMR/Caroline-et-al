@@ -13,6 +13,7 @@ import streamlit as st
 
 import dados as d
 import figuras as fg
+import tabelas as tb
 from figuras import mostra
 
 ARQUIVO_PADRAO = Path(__file__).parent / "Caroline_Camila.xlsx"
@@ -56,6 +57,10 @@ with st.sidebar:
     fg.reinicia()
     st.session_state["_fmt"] = fg.opcoes_sidebar()
     espaco_salvar_todas = st.empty()  # preenchido no fim do script
+    st.divider()
+    tb.reinicia()
+    st.session_state["_tab_unico"] = tb.opcoes_sidebar()
+    espaco_salvar_tabelas = st.empty()  # preenchido no fim do script
 
 df = df_all[df_all["SUBGRUPO"].isin(sel_sub) & df_all["MARCA_EMPRESA"].isin(sel_marca)]
 if df.empty:
@@ -68,24 +73,21 @@ st.caption(f"{len(df)} de {len(df_all)} produtos selecionados")
 aba_dados, aba_car, aba_rot = st.tabs(["📋 Dados", "1 · Caracterização", "2 · Conformidade da rotulagem"])
 
 
-def tabela_resumo(base: pd.DataFrame, var: str, por: str | None = None) -> pd.DataFrame:
-    """Estatísticas descritivas de uma variável numérica (opcionalmente por grupo)."""
-    def f(s: pd.Series) -> pd.Series:
-        s = s.dropna()
-        return pd.Series(
-            {"n": len(s), "Média": s.mean(), "DP": s.std(), "Mediana": s.median(),
-             "Q1": s.quantile(.25), "Q3": s.quantile(.75), "Mín": s.min(), "Máx": s.max()}
-        )
-    if por:
-        out = base.groupby(por, observed=True)[var].apply(f).unstack()
-    else:
-        out = f(base[var]).to_frame(var).T
-    out["n"] = out["n"].astype(int)
-    return out.round(2)
+NOTA_FILTRO = (f"Amostra filtrada: {len(df)} de {len(df_all)} produtos."
+               if len(df) != len(df_all) else "")
+NOTA_FREQ = "n = número de produtos; % = percentual sobre o total de produtos da linha Total."
+NOTA_RESUMO = ("n = número de produtos com informação; DP = desvio padrão; "
+               "Q1–Q3 = primeiro e terceiro quartis; Mín–Máx = menor e maior valor.")
+NOTA_PROP = "Percentual calculado sobre os produtos com informação (células em branco excluídas)."
+
+
+def tabela(df_: pd.DataFrame, titulo: str, nota: str = "", nome: str | None = None) -> None:
+    """Mostra a tabela com botão para salvar em .docx (acrescenta a nota do filtro, se houver)."""
+    tb.mostra_tabela(df_, titulo, nome, " ".join(x for x in (nota, NOTA_FILTRO) if x))
 
 
 def frequencias(s: pd.Series) -> pd.DataFrame:
-    cont = s.fillna("(em branco)").astype(str).value_counts()
+    cont = tb._cat(s).value_counts()
     return pd.DataFrame({"n": cont, "%": (100 * cont / cont.sum()).round(1)})
 
 
@@ -121,6 +123,8 @@ with aba_car:
                      title="Produtos por subgrupo", color_discrete_sequence=[COR])
         fig.update_layout(yaxis={"categoryorder": "total ascending"}, xaxis_title="Nº de produtos")
         mostra(fig)
+        tabela(tb.freq_tabela(df["SUBGRUPO"], "Subgrupo"), "Distribuição dos produtos por subgrupo",
+               NOTA_FREQ, "produtos_por_subgrupo")
 
     with g2:
         por_marca = frequencias(df["MARCA_EMPRESA"]).reset_index(names="Marca")
@@ -128,6 +132,8 @@ with aba_car:
                      title="Produtos por marca/empresa", color_discrete_sequence=[COR])
         fig.update_layout(yaxis={"categoryorder": "total ascending"}, xaxis_title="Nº de produtos")
         mostra(fig)
+        tabela(tb.freq_tabela(df["MARCA_EMPRESA"], "Marca/empresa"), "Distribuição dos produtos por marca/empresa",
+               NOTA_FREQ, "produtos_por_marca_empresa")
 
     st.subheader("Preço e peso por subgrupo")
     p1, p2 = st.columns(2)
@@ -137,7 +143,9 @@ with aba_car:
                          title=titulo, color_discrete_sequence=[COR])
             fig.update_layout(xaxis_title="", yaxis_title=d.rotulo(var))
             mostra(fig)
-            st.dataframe(tabela_resumo(df, var, "SUBGRUPO"), width="stretch")
+            tabela(tb.resumo_artigo(df, var, "SUBGRUPO", casas=2 if var == "PRECO_100G" else 0,
+                                    rotulo_grupo="Subgrupo"),
+                   f"{titulo} segundo o subgrupo", NOTA_RESUMO, f"{var.lower()}_por_subgrupo")
 
     st.subheader("Ingredientes e aditivos")
     i1, i2 = st.columns(2)
@@ -146,6 +154,8 @@ with aba_car:
             fig = px.histogram(df, x=var, nbins=15, title=titulo, color_discrete_sequence=[COR])
             fig.update_layout(xaxis_title=d.rotulo(var), yaxis_title="Produtos", bargap=.05)
             mostra(fig)
+            tabela(tb.resumo_artigo(df, var, "SUBGRUPO", casas=1, rotulo_grupo="Subgrupo"),
+                   f"{titulo} segundo o subgrupo", NOTA_RESUMO, f"{var.lower()}_por_subgrupo")
 
     adit = ["GLUTAMATO_PRESENCA", "NITRATO_PRESENCA", "NITRITO_PRESENCA"]
     adit = [a for a in adit if a in df.columns]
@@ -156,6 +166,9 @@ with aba_car:
                  color_discrete_sequence=[COR])
     fig.update_layout(yaxis_range=[0, 100], xaxis_title="")
     mostra(fig)
+    tabela(tb.proporcao_tabela([(d.rotulo(a), int((df[a] == 1).sum()), int(df[a].notna().sum())) for a in adit],
+                               "Aditivo", "Presença (n)", ordenar=False),
+           "Presença de glutamato, nitrato e nitrito nos produtos", NOTA_PROP, "presenca_aditivos")
 
     st.divider()
     st.subheader("Explorar qualquer variável")
@@ -179,7 +192,11 @@ with aba_car:
             fig = px.box(df, y=var, x=por, color=por, points="all", hover_data=["ID", "PRODUTO"], title="Boxplot")
             fig.update_layout(showlegend=False, yaxis_title=d.rotulo(var), xaxis_title="")
             mostra(fig, f"boxplot_{var}" + (f"_por_{por}" if por else ""))
-        st.dataframe(tabela_resumo(df, var, por), width="stretch")
+        tabela(tb.resumo_artigo(df, var, por, casas=2,
+                                rotulo_grupo=d.rotulo(por) if por else "Variável",
+                                rotulo_total="Total" if por else d.rotulo(var)),
+               d.rotulo(var) + (f" segundo {d.rotulo(por).lower()}" if por else ""), NOTA_RESUMO,
+               f"explorador_{var.lower()}" + (f"_por_{por.lower()}" if por else ""))
     else:
         base = df.assign(**{var: df[var].astype("string").fillna("(em branco)")})
         if por:
@@ -191,7 +208,17 @@ with aba_car:
             fig = px.bar(tab, x=var, y="n", text="n", title="Frequência", color_discrete_sequence=[COR])
         fig.update_layout(xaxis_title=d.rotulo(var), yaxis_title="Produtos")
         mostra(fig, f"frequencia_{var}" + (f"_por_{por}" if por else ""))
-        st.dataframe(frequencias(df[var]), width="stretch")
+        bin_var = tipo == "Binária (0/1)"
+        if por:
+            bin_por = dic.set_index("Variável").loc[por, "Tipo"] == "Binária (0/1)"
+            tab_exp = tb.cruzada(df, var, por, d.rotulo(var), bin_var, bin_por)
+            titulo_exp = f"{d.rotulo(var)} segundo {d.rotulo(por).lower()}"
+            nota_exp = "Valores: n (%); percentuais calculados sobre o total de cada coluna."
+        else:
+            tab_exp = tb.freq_tabela(df[var], d.rotulo(var), binaria=bin_var)
+            titulo_exp, nota_exp = d.rotulo(var), NOTA_FREQ
+        tabela(tab_exp, titulo_exp, nota_exp,
+               f"explorador_{var.lower()}" + (f"_por_{por.lower()}" if por else ""))
 
 # ------------------------------------------------------------ Rotulagem
 with aba_rot:
@@ -218,8 +245,12 @@ with aba_rot:
         )
     )
     fig.update_layout(xaxis={"range": [0, 115], "title": "% de produtos"}, height=max(380, 34 * len(res)),
-                      margin={"l": 10, "r": 40})
+                      margin={"l": 10, "r": 120})
     mostra(fig, "conformidade_itens_obrigatorios")
+    tabela(tb.proporcao_tabela([(r.Item, int(r.Conformes), int(r.Válidos)) for r in res.itertuples()],
+                               "Item", "Conformes (n)"),
+           "Conformidade dos produtos quanto aos itens obrigatórios de rotulagem", NOTA_PROP,
+           "conformidade_itens_obrigatorios")
 
     st.subheader("Rotulagem nutricional frontal (RNF)")
     r1, r2, r3, r4 = st.columns(4)
@@ -230,6 +261,14 @@ with aba_rot:
     conf = (pres & (df["RNF_CONFORME"] == 1))
     r3.metric("Conforme (entre as presentes)", f"{int(conf.sum())} / {int(pres.sum())}")
     r4.metric("Média de alertas", f"{df['N_ALERTAS_RNF'].mean():.2f}")
+    tabela(tb.proporcao_tabela(
+        [("RNF exigida", int(exig.sum()), int(df["RNF_EXIGIDA"].notna().sum())),
+         ("RNF presente (entre as exigidas)", int((exig & pres).sum()), int(exig.sum())),
+         ("RNF conforme (entre as presentes)", int(conf.sum()), int(pres.sum()))],
+        "Indicador", "n", ordenar=False),
+        "Rotulagem nutricional frontal (RNF) nos produtos",
+        "RNF = rotulagem nutricional frontal. A base (N) de cada linha é o grupo indicado no rótulo da linha.",
+        "rnf_resumo")
 
     a, b = st.columns(2)
     with a:
@@ -238,12 +277,17 @@ with aba_rot:
                      color_discrete_sequence=[COR])
         fig.update_layout(yaxis_title="Produtos")
         mostra(fig)
+        tabela(tb.freq_tabela(df["N_ALERTAS_RNF"], "Nº de alertas", ordenar="indice"),
+               "Distribuição dos produtos segundo o número de alertas na RNF", NOTA_FREQ, "rnf_n_alertas")
     with b:
         tab = frequencias(df["ESPEC_RNF"]).reset_index(names="Nutriente(s) no alerta")
         fig = px.bar(tab, x="n", y="Nutriente(s) no alerta", orientation="h", text="n",
                      title="Nutriente(s) indicado(s) na RNF", color_discrete_sequence=[COR])
         fig.update_layout(yaxis={"categoryorder": "total ascending"}, xaxis_title="Produtos")
         mostra(fig)
+        tabela(tb.freq_tabela(df["ESPEC_RNF"], "Nutriente(s) indicado(s)"),
+               "Distribuição dos produtos segundo o(s) nutriente(s) indicado(s) na RNF", NOTA_FREQ,
+               "rnf_nutrientes")
 
     st.subheader("Conformidade por subgrupo")
     long = df.melt(id_vars="SUBGRUPO", value_vars=itens, var_name="Item", value_name="v").dropna(subset=["v"])
@@ -253,6 +297,12 @@ with aba_rot:
                     zmin=0, zmax=100, labels={"color": "% conforme"})
     fig.update_layout(xaxis_title="", yaxis_title="", height=max(260, 70 * len(heat)))
     mostra(fig, "conformidade_por_subgrupo")
+    tab_sub = heat.T.reset_index(names="Item").rename_axis(columns=None)
+    for c in tab_sub.columns[1:]:
+        tab_sub[c] = tab_sub[c].map(lambda v: tb._num(v, 1))
+    tabela(tab_sub, "Percentual de conformidade dos itens obrigatórios segundo o subgrupo",
+           "Valores em % de produtos conformes dentro de cada subgrupo (células em branco excluídas).",
+           "conformidade_por_subgrupo")
 
     st.subheader("Mapa produto × item")
     if st.checkbox("Mostrar mapa de calor por produto", value=False):
@@ -284,5 +334,18 @@ with espaco_salvar_todas.container():
             try:
                 _arqs = fg.salvar_todas(_formatos, _escala)
                 st.success(f"{len(_arqs)} arquivos salvos em `figuras/`.")
+            except Exception as e:  # noqa: BLE001
+                st.error(f"Não consegui salvar: {e}")
+
+# ------------------------------------------------------- salvar todas as tabelas
+with espaco_salvar_tabelas.container():
+    if st.button("💾 Salvar TODAS as tabelas (.docx)"):
+        with st.spinner("Gravando tabelas…"):
+            try:
+                _arqs, _falhas = tb.salvar_todas(st.session_state["_tab_unico"])
+                st.success(f"{len(_arqs)} arquivos salvos em `tabelas/`.")
+                if _falhas:
+                    st.warning("Não consegui gravar (feche o arquivo no Word e tente de novo):\n- "
+                               + "\n- ".join(_falhas))
             except Exception as e:  # noqa: BLE001
                 st.error(f"Não consegui salvar: {e}")
