@@ -10,6 +10,7 @@ Uso:  python gerar_site.py        (depois: git add docs && git commit && git pus
 from __future__ import annotations
 
 import html
+from datetime import date
 import shutil
 from pathlib import Path
 
@@ -171,7 +172,7 @@ def monta() -> str:
             "<title>Análise descritiva</title>"
             f"<style>{CSS}</style></head><body>{''.join(nav)}"
             f"<main>{inicio}{''.join(paginas)}"
-            "<footer>Resultados agregados; gerado por <code>gerar_site.py</code>.</footer></main>"
+            f"<footer>Resultados agregados; gerado por <code>gerar_site.py</code> em {date.today():%d/%m/%Y}.</footer></main>"
             f"<script>{JS}</script></body></html>")
 
 
