@@ -93,11 +93,14 @@ def pagina(vid: str, titulo: str, figs: list[str], tabs: list[str]) -> str:
 
 CSS = """
 :root{--bg:#fff;--fg:#1f2328;--mut:#656d76;--lin:#d0d7de;--side:#f6f8fa;--ac:#0b5cad;--hov:#e8eef6}
-@media (prefers-color-scheme:dark){:root{--bg:#0f1318;--fg:#e6edf3;--mut:#8b949e;--lin:#30363d;--side:#161b22;--ac:#58a6ff;--hov:#1f2937}}
+@media (prefers-color-scheme:dark){:root:not([data-tema=claro]){--bg:#0f1318;--fg:#e6edf3;--mut:#8b949e;--lin:#30363d;--side:#161b22;--ac:#58a6ff;--hov:#1f2937}}
+:root[data-tema=escuro]{--bg:#0f1318;--fg:#e6edf3;--mut:#8b949e;--lin:#30363d;--side:#161b22;--ac:#58a6ff;--hov:#1f2937}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.55 system-ui,"Segoe UI",sans-serif;display:flex;min-height:100vh}
 nav{width:280px;flex:none;background:var(--side);border-right:1px solid var(--lin);padding:16px 12px;position:sticky;top:0;height:100vh;overflow-y:auto}
 nav .titulo{font-weight:700;font-size:1.05rem;margin:4px 8px 12px}
+#tema{display:block;width:calc(100% - 16px);margin:0 8px 8px;padding:5px 10px;border:1px solid var(--lin);border-radius:6px;background:transparent;color:var(--fg);font:inherit;font-size:.85rem;cursor:pointer;text-align:left}
+#tema:hover{background:var(--hov)}
 nav h3{font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--mut);margin:18px 8px 4px}
 nav a{display:block;padding:6px 10px;border-radius:6px;color:var(--fg);text-decoration:none;font-size:.93rem}
 nav a:hover{background:var(--hov)}
@@ -142,11 +145,17 @@ function mostra(){
   window.scrollTo(0,0);
 }
 addEventListener('hashchange',mostra);mostra();
+const btn=document.getElementById('tema'),raiz=document.documentElement;
+const escuro=()=>raiz.dataset.tema?raiz.dataset.tema==='escuro':matchMedia('(prefers-color-scheme:dark)').matches;
+function rotulo(){btn.textContent=escuro()?'☀ Modo claro':'🌙 Modo escuro';}
+btn.addEventListener('click',()=>{const t=escuro()?'claro':'escuro';raiz.dataset.tema=t;try{localStorage.setItem('tema',t);}catch(e){}rotulo();});
+rotulo();
 """
 
 
 def monta() -> str:
     nav = ['<nav><div class="titulo">Rotulagem de produtos cárneos</div>',
+           '<button id="tema" type="button"></button>',
            '<a href="#inicio" data-id="inicio">Início</a>']
     paginas = []
     cartoes = []
@@ -170,6 +179,7 @@ def monta() -> str:
     return ('<!doctype html><html lang="pt-BR"><head><meta charset="utf-8">'
             '<meta name="viewport" content="width=device-width,initial-scale=1">'
             "<title>Análise descritiva</title>"
+            "<script>try{var t=localStorage.getItem('tema');if(t)document.documentElement.dataset.tema=t}catch(e){}</script>"
             f"<style>{CSS}</style></head><body>{''.join(nav)}"
             f"<main>{inicio}{''.join(paginas)}"
             f"<footer>Resultados agregados; gerado por <code>gerar_site.py</code> em {date.today():%d/%m/%Y}.</footer></main>"
