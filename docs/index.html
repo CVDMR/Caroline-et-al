@@ -1,58 +1,1043 @@
-<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Análise descritiva</title><script>try{var t=localStorage.getItem('tema');if(t)document.documentElement.dataset.tema=t}catch(e){}</script><style>
-:root{--bg:#fff;--fg:#1f2328;--mut:#656d76;--lin:#d0d7de;--side:#f6f8fa;--ac:#0b5cad;--hov:#e8eef6}
-@media (prefers-color-scheme:dark){:root:not([data-tema=claro]){--bg:#0f1318;--fg:#e6edf3;--mut:#8b949e;--lin:#30363d;--side:#161b22;--ac:#58a6ff;--hov:#1f2937}}
-:root[data-tema=escuro]{--bg:#0f1318;--fg:#e6edf3;--mut:#8b949e;--lin:#30363d;--side:#161b22;--ac:#58a6ff;--hov:#1f2937}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.55 system-ui,"Segoe UI",sans-serif;display:flex;min-height:100vh}
-nav{width:280px;flex:none;background:var(--side);border-right:1px solid var(--lin);padding:16px 12px;position:sticky;top:0;height:100vh;overflow-y:auto}
-nav .titulo{font-weight:700;font-size:1.05rem;margin:4px 8px 12px}
-#tema{display:block;width:calc(100% - 16px);margin:0 8px 8px;padding:5px 10px;border:1px solid var(--lin);border-radius:6px;background:transparent;color:var(--fg);font:inherit;font-size:.85rem;cursor:pointer;text-align:left}
-#tema:hover{background:var(--hov)}
-nav h3{font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--mut);margin:18px 8px 4px}
-nav a{display:block;padding:6px 10px;border-radius:6px;color:var(--fg);text-decoration:none;font-size:.93rem}
-nav a:hover{background:var(--hov)}
-nav a.ativo{background:var(--hov);color:var(--ac);font-weight:600;box-shadow:inset 3px 0 var(--ac)}
-main{flex:1;min-width:0;max-width:980px;padding:28px 40px 60px;margin:0 auto}
-.pagina{display:none}.pagina.ativa{display:block}
-h1{font-size:1.7rem;margin:0 0 6px;border-bottom:1px solid var(--lin);padding-bottom:8px}
-h2{font-size:1.1rem;color:var(--mut);margin:26px 0 8px}
-figure{margin:12px 0 22px}
-.figura img{max-width:100%;height:auto;border:1px solid var(--lin);border-radius:6px;background:#fff}
-.tabela figcaption{font-size:.92rem;margin-bottom:4px}
-.rolagem{overflow-x:auto}
-table{border-collapse:collapse;font-family:"Times New Roman",Times,serif;font-size:.98rem;min-width:50%}
-thead th{border-top:2px solid var(--fg);border-bottom:1px solid var(--fg);text-align:center;padding:4px 12px}
-td{padding:3px 12px;text-align:center}
-td:first-child,th:first-child{text-align:left}
-tbody tr:last-child td{border-bottom:2px solid var(--fg)}
-tr.total td{border-top:1px solid var(--fg)}
-.nota{font-size:.82rem;color:var(--mut);margin:4px 0 0}
-.inicio p{max-width:68ch}
-.inicio .grade{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px;margin-top:14px}
-.inicio .cartao{border:1px solid var(--lin);border-radius:8px;padding:10px 12px;text-decoration:none;color:var(--fg)}
-.inicio .cartao:hover{background:var(--hov)}
-.inicio .cartao small{display:block;color:var(--mut)}
-footer{margin-top:40px;font-size:.8rem;color:var(--mut)}
-#abre{display:none}
-@media (max-width:760px){
- body{display:block}
- nav{position:static;width:auto;height:auto;border-right:0;border-bottom:1px solid var(--lin);max-height:45vh}
- main{padding:18px 16px 40px}
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt" xml:lang="pt"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Rotulagem e composição de produtos cárneos da Bahia – Rotulagem de cárneos da Bahia</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
 }
-</style></head><body><nav><div class="titulo">Rotulagem de produtos cárneos</div><button id="tema" type="button"></button><a href="#inicio" data-id="inicio">Início</a><h3>Análises estatísticas</h3><a href="r/index.html">Relatório em R (Quarto) ↗</a><h3>Caracterização</h3><a href="#subgrupo" data-id="subgrupo">Subgrupo</a><a href="#marca" data-id="marca">Marca/empresa</a><a href="#preco" data-id="preco">Preço por 100 g</a><a href="#peso" data-id="peso">Peso adquirido (g)</a><h3>Ingredientes e aditivos</h3><a href="#ingredientes" data-id="ingredientes">Nº de ingredientes</a><a href="#aditivos" data-id="aditivos">Nº de aditivos</a><a href="#glutamato" data-id="glutamato">Glutamato, nitrato e nitrito</a><h3>Rotulagem</h3><a href="#conformidade" data-id="conformidade">Itens obrigatórios</a><a href="#rnf" data-id="rnf">Rotulagem nutricional frontal (RNF)</a><a href="#rnf_alertas" data-id="rnf_alertas">Nº de alertas na RNF</a><a href="#rnf_nutrientes" data-id="rnf_nutrientes">Nutriente(s) indicado(s) na RNF</a></nav><main><section class="pagina inicio" id="p-inicio"><h1>Análise descritiva</h1><p>Resultados da análise descritiva da rotulagem e da composição de produtos cárneos comercializados na Bahia. Escolha uma variável no menu à esquerda para ver as figuras e as tabelas correspondentes.</p><p>As análises estatísticas feitas em R estão no <a href="r/index.html">relatório em Quarto</a>.</p><div class="grade"><a class="cartao" href="#subgrupo">Subgrupo<small>1 figura(s) · 1 tabela(s)</small></a><a class="cartao" href="#marca">Marca/empresa<small>1 figura(s) · 1 tabela(s)</small></a><a class="cartao" href="#preco">Preço por 100 g<small>3 figura(s) · 2 tabela(s)</small></a><a class="cartao" href="#peso">Peso adquirido (g)<small>1 figura(s) · 1 tabela(s)</small></a><a class="cartao" href="#ingredientes">Nº de ingredientes<small>1 figura(s) · 1 tabela(s)</small></a><a class="cartao" href="#aditivos">Nº de aditivos<small>1 figura(s) · 1 tabela(s)</small></a><a class="cartao" href="#glutamato">Glutamato, nitrato e nitrito<small>1 figura(s) · 1 tabela(s)</small></a><a class="cartao" href="#conformidade">Itens obrigatórios<small>2 figura(s) · 2 tabela(s)</small></a><a class="cartao" href="#rnf">Rotulagem nutricional frontal (RNF)<small>0 figura(s) · 1 tabela(s)</small></a><a class="cartao" href="#rnf_alertas">Nº de alertas na RNF<small>1 figura(s) · 1 tabela(s)</small></a><a class="cartao" href="#rnf_nutrientes">Nutriente(s) indicado(s) na RNF<small>1 figura(s) · 1 tabela(s)</small></a></div></section><section class="pagina" id="p-subgrupo"><h1>Subgrupo</h1><h2>Figuras</h2><figure class="figura"><a href="figuras/produtos_por_subgrupo.png" target="_blank"><img src="figuras/produtos_por_subgrupo.png" alt="produtos por subgrupo" loading="lazy"></a></figure><h2>Tabelas</h2><figure class="tabela"><figcaption><b>Tabela 1.</b> Distribuição dos produtos por subgrupo</figcaption><div class="rolagem"><table><thead><tr><th>Subgrupo</th><th>n</th><th>%</th></tr></thead><tbody><tr><td>Temperado</td><td>14</td><td>29,2</td></tr><tr><td>Salgado</td><td>10</td><td>20,8</td></tr><tr><td>Emulsionado</td><td>8</td><td>16,7</td></tr><tr><td>Defumado</td><td>8</td><td>16,7</td></tr><tr><td>Salgado e defumado</td><td>4</td><td>8,3</td></tr><tr><td>Linguiça</td><td>3</td><td>6,3</td></tr><tr><td>Salgado e dessecado</td><td>1</td><td>2,1</td></tr><tr class="total"><td>Total</td><td>48</td><td>100,0</td></tr></tbody></table></div><p class="nota"><i>Nota.</i> n = número de produtos; % = percentual sobre o total de produtos da linha Total.</p></figure></section><section class="pagina" id="p-marca"><h1>Marca/empresa</h1><h2>Figuras</h2><figure class="figura"><a href="figuras/produtos_por_marca_empresa.png" target="_blank"><img src="figuras/produtos_por_marca_empresa.png" alt="produtos por marca empresa" loading="lazy"></a></figure><h2>Tabelas</h2><figure class="tabela"><figcaption><b>Tabela 2.</b> Distribuição dos produtos por marca/empresa</figcaption><div class="rolagem"><table><thead><tr><th>Marca/empresa</th><th>n</th><th>%</th></tr></thead><tbody><tr><td>M03</td><td>15</td><td>31,3</td></tr><tr><td>M12</td><td>7</td><td>14,6</td></tr><tr><td>M05</td><td>5</td><td>10,4</td></tr><tr><td>M09</td><td>4</td><td>8,3</td></tr><tr><td>M02</td><td>3</td><td>6,3</td></tr><tr><td>M01</td><td>2</td><td>4,2</td></tr><tr><td>M04</td><td>2</td><td>4,2</td></tr><tr><td>M06</td><td>2</td><td>4,2</td></tr><tr><td>M14</td><td>2</td><td>4,2</td></tr><tr><td>M07</td><td>1</td><td>2,1</td></tr><tr><td>M08</td><td>1</td><td>2,1</td></tr><tr><td>M10</td><td>1</td><td>2,1</td></tr><tr><td>M11</td><td>1</td><td>2,1</td></tr><tr><td>M13</td><td>1</td><td>2,1</td></tr><tr><td>M15</td><td>1</td><td>2,1</td></tr><tr class="total"><td>Total</td><td>48</td><td>100,0</td></tr></tbody></table></div><p class="nota"><i>Nota.</i> n = número de produtos; % = percentual sobre o total de produtos da linha Total.</p></figure></section><section class="pagina" id="p-preco"><h1>Preço por 100 g</h1><h2>Figuras</h2><figure class="figura"><a href="figuras/preco_por_100_g.png" target="_blank"><img src="figuras/preco_por_100_g.png" alt="preco por 100 g" loading="lazy"></a></figure><figure class="figura"><a href="figuras/histograma_preco_100g.png" target="_blank"><img src="figuras/histograma_preco_100g.png" alt="histograma preco 100g" loading="lazy"></a></figure><figure class="figura"><a href="figuras/boxplot_preco_100g.png" target="_blank"><img src="figuras/boxplot_preco_100g.png" alt="boxplot preco 100g" loading="lazy"></a></figure><h2>Tabelas</h2><figure class="tabela"><figcaption><b>Tabela 3.</b> Preço por 100 g segundo o subgrupo</figcaption><div class="rolagem"><table><thead><tr><th>Subgrupo</th><th>n</th><th>Média (DP)</th><th>Mediana (Q1–Q3)</th><th>Mín–Máx</th></tr></thead><tbody><tr><td>Defumado</td><td>8</td><td>4,55 (1,84)</td><td>4,65 (3,31–5,25)</td><td>2,36–7,80</td></tr><tr><td>Emulsionado</td><td>8</td><td>2,34 (2,44)</td><td>1,11 (0,91–2,54)</td><td>0,80–6,28</td></tr><tr><td>Linguiça</td><td>3</td><td>1,81 (0,51)</td><td>2,00 (1,62–2,10)</td><td>1,24–2,20</td></tr><tr><td>Salgado</td><td>10</td><td>4,71 (1,76)</td><td>4,55 (4,41–4,97)</td><td>2,48–8,99</td></tr><tr><td>Salgado e defumado</td><td>4</td><td>3,10 (0,69)</td><td>3,30 (2,91–3,48)</td><td>2,11–3,69</td></tr><tr><td>Salgado e dessecado</td><td>1</td><td>4,17 (–)</td><td>4,17 (4,17–4,17)</td><td>4,17–4,17</td></tr><tr><td>Temperado</td><td>14</td><td>2,65 (2,07)</td><td>2,00 (1,71–2,41)</td><td>1,09–8,70</td></tr><tr class="total"><td>Total</td><td>48</td><td>3,36 (2,08)</td><td>2,47 (1,87–4,68)</td><td>0,80–8,99</td></tr></tbody></table></div><p class="nota"><i>Nota.</i> n = número de produtos com informação; DP = desvio padrão; Q1–Q3 = primeiro e terceiro quartis; Mín–Máx = menor e maior valor.</p></figure><figure class="tabela"><figcaption><b>Tabela 8.</b> Preço por 100 g</figcaption><div class="rolagem"><table><thead><tr><th>Variável</th><th>n</th><th>Média (DP)</th><th>Mediana (Q1–Q3)</th><th>Mín–Máx</th></tr></thead><tbody><tr><td>Preço por 100 g</td><td>48</td><td>3,36 (2,08)</td><td>2,47 (1,87–4,68)</td><td>0,80–8,99</td></tr></tbody></table></div><p class="nota"><i>Nota.</i> n = número de produtos com informação; DP = desvio padrão; Q1–Q3 = primeiro e terceiro quartis; Mín–Máx = menor e maior valor.</p></figure></section><section class="pagina" id="p-peso"><h1>Peso adquirido (g)</h1><h2>Figuras</h2><figure class="figura"><a href="figuras/peso_adquirido_g.png" target="_blank"><img src="figuras/peso_adquirido_g.png" alt="peso adquirido g" loading="lazy"></a></figure><h2>Tabelas</h2><figure class="tabela"><figcaption><b>Tabela 4.</b> Peso adquirido (g) segundo o subgrupo</figcaption><div class="rolagem"><table><thead><tr><th>Subgrupo</th><th>n</th><th>Média (DP)</th><th>Mediana (Q1–Q3)</th><th>Mín–Máx</th></tr></thead><tbody><tr><td>Defumado</td><td>8</td><td>320 (71)</td><td>306 (270–317)</td><td>268–482</td></tr><tr><td>Emulsionado</td><td>8</td><td>2756 (1582)</td><td>2516 (2072–3762)</td><td>640–5000</td></tr><tr><td>Linguiça</td><td>3</td><td>4167 (1443)</td><td>5000 (3750–5000)</td><td>2500–5000</td></tr><tr><td>Salgado</td><td>10</td><td>456 (367)</td><td>346 (322–370)</td><td>172–1458</td></tr><tr><td>Salgado e defumado</td><td>4</td><td>2813 (2668)</td><td>2791 (504–5100)</td><td>500–5170</td></tr><tr><td>Salgado e dessecado</td><td>1</td><td>5000 (–)</td><td>5000 (5000–5000)</td><td>5000–5000</td></tr><tr><td>Temperado</td><td>14</td><td>930 (178)</td><td>1000 (1000–1000)</td><td>500–1000</td></tr><tr class="total"><td>Total</td><td>48</td><td>1478 (1627)</td><td>1000 (356–1719)</td><td>172–5170</td></tr></tbody></table></div><p class="nota"><i>Nota.</i> n = número de produtos com informação; DP = desvio padrão; Q1–Q3 = primeiro e terceiro quartis; Mín–Máx = menor e maior valor.</p></figure></section><section class="pagina" id="p-ingredientes"><h1>Nº de ingredientes</h1><h2>Figuras</h2><figure class="figura"><a href="figuras/no_de_ingredientes.png" target="_blank"><img src="figuras/no_de_ingredientes.png" alt="no de ingredientes" loading="lazy"></a></figure><h2>Tabelas</h2><figure class="tabela"><figcaption><b>Tabela 5.</b> Nº de ingredientes segundo o subgrupo</figcaption><div class="rolagem"><table><thead><tr><th>Subgrupo</th><th>n</th><th>Média (DP)</th><th>Mediana (Q1–Q3)</th><th>Mín–Máx</th></tr></thead><tbody><tr><td>Defumado</td><td>8</td><td>7,0 (0,0)</td><td>7,0 (7,0–7,0)</td><td>7,0–7,0</td></tr><tr><td>Emulsionado</td><td>8</td><td>19,1 (4,5)</td><td>19,0 (16,3–21,8)</td><td>13,0–26,0</td></tr><tr><td>Linguiça</td><td>3</td><td>18,3 (3,1)</td><td>19,0 (17,0–20,0)</td><td>15,0–21,0</td></tr><tr><td>Salgado</td><td>9</td><td>4,0 (1,7)</td><td>4,0 (2,0–5,0)</td><td>2,0–7,0</td></tr><tr><td>Salgado e defumado</td><td>4</td><td>11,5 (1,0)</td><td>11,0 (11,0–11,5)</td><td>11,0–13,0</td></tr><tr><td>Salgado e dessecado</td><td>1</td><td>2,0 (–)</td><td>2,0 (2,0–2,0)</td><td>2,0–2,0</td></tr><tr><td>Temperado</td><td>14</td><td>14,6 (3,2)</td><td>15,0 (15,0–16,0)</td><td>4,0–17,0</td></tr><tr class="total"><td>Total</td><td>47</td><td>11,8 (6,3)</td><td>13,0 (7,0–16,0)</td><td>2,0–26,0</td></tr></tbody></table></div><p class="nota"><i>Nota.</i> n = número de produtos com informação; DP = desvio padrão; Q1–Q3 = primeiro e terceiro quartis; Mín–Máx = menor e maior valor.</p></figure></section><section class="pagina" id="p-aditivos"><h1>Nº de aditivos</h1><h2>Figuras</h2><figure class="figura"><a href="figuras/no_de_aditivos.png" target="_blank"><img src="figuras/no_de_aditivos.png" alt="no de aditivos" loading="lazy"></a></figure><h2>Tabelas</h2><figure class="tabela"><figcaption><b>Tabela 6.</b> Nº de aditivos segundo o subgrupo</figcaption><div class="rolagem"><table><thead><tr><th>Subgrupo</th><th>n</th><th>Média (DP)</th><th>Mediana (Q1–Q3)</th><th>Mín–Máx</th></tr></thead><tbody><tr><td>Defumado</td><td>8</td><td>4,0 (0,0)</td><td>4,0 (4,0–4,0)</td><td>4,0–4,0</td></tr><tr><td>Emulsionado</td><td>8</td><td>8,8 (3,6)</td><td>9,0 (6,3–12,0)</td><td>4,0–13,0</td></tr><tr><td>Linguiça</td><td>3</td><td>12,0 (5,0)</td><td>12,0 (9,5–14,5)</td><td>7,0–17,0</td></tr><tr><td>Salgado</td><td>9</td><td>1,3 (1,3)</td><td>1,0 (0,0–2,0)</td><td>0,0–4,0</td></tr><tr><td>Salgado e defumado</td><td>4</td><td>6,3 (1,5)</td><td>7,0 (6,3–7,0)</td><td>4,0–7,0</td></tr><tr><td>Salgado e dessecado</td><td>1</td><td>0,0 (–)</td><td>0,0 (0,0–0,0)</td><td>0,0–0,0</td></tr><tr><td>Temperado</td><td>14</td><td>3,1 (1,4)</td><td>3,0 (3,0–3,0)</td><td>0,0–7,0</td></tr><tr class="total"><td>Total</td><td>47</td><td>4,7 (3,8)</td><td>4,0 (3,0–7,0)</td><td>0,0–17,0</td></tr></tbody></table></div><p class="nota"><i>Nota.</i> n = número de produtos com informação; DP = desvio padrão; Q1–Q3 = primeiro e terceiro quartis; Mín–Máx = menor e maior valor.</p></figure></section><section class="pagina" id="p-glutamato"><h1>Glutamato, nitrato e nitrito</h1><h2>Figuras</h2><figure class="figura"><a href="figuras/presenca_de_glutamato_nitrato_e_nitrito.png" target="_blank"><img src="figuras/presenca_de_glutamato_nitrato_e_nitrito.png" alt="presenca de glutamato nitrato e nitrito" loading="lazy"></a></figure><h2>Tabelas</h2><figure class="tabela"><figcaption><b>Tabela 7.</b> Presença de glutamato, nitrato e nitrito nos produtos</figcaption><div class="rolagem"><table><thead><tr><th>Aditivo</th><th>Presença (n)</th><th>Válidos (N)</th><th>%</th></tr></thead><tbody><tr><td>Presença de glutamato</td><td>20</td><td>47</td><td>42,6</td></tr><tr><td>Presença de nitrato</td><td>22</td><td>47</td><td>46,8</td></tr><tr><td>Presença de nitrito</td><td>27</td><td>47</td><td>57,4</td></tr></tbody></table></div><p class="nota"><i>Nota.</i> Percentual calculado sobre os produtos com informação (células em branco excluídas).</p></figure></section><section class="pagina" id="p-conformidade"><h1>Itens obrigatórios</h1><h2>Figuras</h2><figure class="figura"><a href="figuras/conformidade_itens_obrigatorios.png" target="_blank"><img src="figuras/conformidade_itens_obrigatorios.png" alt="conformidade itens obrigatorios" loading="lazy"></a></figure><figure class="figura"><a href="figuras/conformidade_por_subgrupo.png" target="_blank"><img src="figuras/conformidade_por_subgrupo.png" alt="conformidade por subgrupo" loading="lazy"></a></figure><h2>Tabelas</h2><figure class="tabela"><figcaption><b>Tabela 9.</b> Conformidade dos produtos quanto aos itens obrigatórios de rotulagem</figcaption><div class="rolagem"><table><thead><tr><th>Item</th><th>Conformes (n)</th><th>Válidos (N)</th><th>%</th></tr></thead><tbody><tr><td>Conteúdo líquido</td><td>48</td><td>48</td><td>100,0</td></tr><tr><td>Declaração sobre glúten</td><td>48</td><td>48</td><td>100,0</td></tr><tr><td>Denominação de venda</td><td>48</td><td>48</td><td>100,0</td></tr><tr><td>Identificação do produtor</td><td>48</td><td>48</td><td>100,0</td></tr><tr><td>Lote</td><td>48</td><td>48</td><td>100,0</td></tr><tr><td>Orientação de armazenamento</td><td>48</td><td>48</td><td>100,0</td></tr><tr><td>Porção declarada</td><td>48</td><td>48</td><td>100,0</td></tr><tr><td>Selo de inspeção</td><td>48</td><td>48</td><td>100,0</td></tr><tr><td>Tabela nutricional</td><td>48</td><td>48</td><td>100,0</td></tr><tr><td>Validade</td><td>48</td><td>48</td><td>100,0</td></tr><tr><td>Lista de ingredientes</td><td>47</td><td>48</td><td>97,9</td></tr><tr><td>Conformidade da tabela nutricional</td><td>39</td><td>48</td><td>81,3</td></tr></tbody></table></div><p class="nota"><i>Nota.</i> Percentual calculado sobre os produtos com informação (células em branco excluídas).</p></figure><figure class="tabela"><figcaption><b>Tabela 13.</b> Percentual de conformidade dos itens obrigatórios segundo o subgrupo</figcaption><div class="rolagem"><table><thead><tr><th>Item</th><th>Defumado</th><th>Emulsionado</th><th>Linguiça</th><th>Salgado</th><th>Salgado e defumado</th><th>Salgado e dessecado</th><th>Temperado</th></tr></thead><tbody><tr><td>Conformidade da tabela nutricional</td><td>100,0</td><td>75,0</td><td>66,7</td><td>90,0</td><td>25,0</td><td>0,0</td><td>92,9</td></tr><tr><td>Conteúdo líquido</td><td>100,0</td><td>100,0</td><td>100,0</td><td>100,0</td><td>100,0</td><td>100,0</td><td>100,0</td></tr><tr><td>Declaração sobre glúten</td><td>100,0</td><td>100,0</td><td>100,0</td><td>100,0</td><td>100,0</td><td>100,0</td><td>100,0</td></tr><tr><td>Denominação de venda</td><td>100,0</td><td>100,0</td><td>100,0</td><td>100,0</td><td>100,0</td><td>100,0</td><td>100,0</td></tr><tr><td>Identificação do produtor</td><td>100,0</td><td>100,0</td><td>100,0</td><td>100,0</td><td>100,0</td><td>100,0</td><td>100,0</td></tr><tr><td>Lista de ingredientes</td><td>100,0</td><td>100,0</td><td>100,0</td><td>90,0</td><td>100,0</td><td>100,0</td><td>100,0</td></tr><tr><td>Lote</td><td>100,0</td><td>100,0</td><td>100,0</td><td>100,0</td><td>100,0</td><td>100,0</td><td>100,0</td></tr><tr><td>Orientação de armazenamento</td><td>100,0</td><td>100,0</td><td>100,0</td><td>100,0</td><td>100,0</td><td>100,0</td><td>100,0</td></tr><tr><td>Porção declarada</td><td>100,0</td><td>100,0</td><td>100,0</td><td>100,0</td><td>100,0</td><td>100,0</td><td>100,0</td></tr><tr><td>Selo de inspeção</td><td>100,0</td><td>100,0</td><td>100,0</td><td>100,0</td><td>100,0</td><td>100,0</td><td>100,0</td></tr><tr><td>Tabela nutricional</td><td>100,0</td><td>100,0</td><td>100,0</td><td>100,0</td><td>100,0</td><td>100,0</td><td>100,0</td></tr><tr><td>Validade</td><td>100,0</td><td>100,0</td><td>100,0</td><td>100,0</td><td>100,0</td><td>100,0</td><td>100,0</td></tr></tbody></table></div><p class="nota"><i>Nota.</i> Valores em % de produtos conformes dentro de cada subgrupo (células em branco excluídas).</p></figure></section><section class="pagina" id="p-rnf"><h1>Rotulagem nutricional frontal (RNF)</h1><h2>Tabelas</h2><figure class="tabela"><figcaption><b>Tabela 10.</b> Rotulagem nutricional frontal (RNF) nos produtos</figcaption><div class="rolagem"><table><thead><tr><th>Indicador</th><th>n</th><th>Válidos (N)</th><th>%</th></tr></thead><tbody><tr><td>RNF exigida</td><td>36</td><td>48</td><td>75,0</td></tr><tr><td>RNF presente (entre as exigidas)</td><td>32</td><td>36</td><td>88,9</td></tr><tr><td>RNF conforme (entre as presentes)</td><td>27</td><td>32</td><td>84,4</td></tr></tbody></table></div><p class="nota"><i>Nota.</i> RNF = rotulagem nutricional frontal. A base (N) de cada linha é o grupo indicado no rótulo da linha.</p></figure></section><section class="pagina" id="p-rnf_alertas"><h1>Nº de alertas na RNF</h1><h2>Figuras</h2><figure class="figura"><a href="figuras/no_de_alertas_na_rnf.png" target="_blank"><img src="figuras/no_de_alertas_na_rnf.png" alt="no de alertas na rnf" loading="lazy"></a></figure><h2>Tabelas</h2><figure class="tabela"><figcaption><b>Tabela 11.</b> Distribuição dos produtos segundo o número de alertas na RNF</figcaption><div class="rolagem"><table><thead><tr><th>Nº de alertas</th><th>n</th><th>%</th></tr></thead><tbody><tr><td>0</td><td>16</td><td>33,3</td></tr><tr><td>1</td><td>21</td><td>43,8</td></tr><tr><td>2</td><td>11</td><td>22,9</td></tr><tr class="total"><td>Total</td><td>48</td><td>100,0</td></tr></tbody></table></div><p class="nota"><i>Nota.</i> n = número de produtos; % = percentual sobre o total de produtos da linha Total.</p></figure></section><section class="pagina" id="p-rnf_nutrientes"><h1>Nutriente(s) indicado(s) na RNF</h1><h2>Figuras</h2><figure class="figura"><a href="figuras/nutriente_s_indicado_s_na_rnf.png" target="_blank"><img src="figuras/nutriente_s_indicado_s_na_rnf.png" alt="nutriente s indicado s na rnf" loading="lazy"></a></figure><h2>Tabelas</h2><figure class="tabela"><figcaption><b>Tabela 12.</b> Distribuição dos produtos segundo o(s) nutriente(s) indicado(s) na RNF</figcaption><div class="rolagem"><table><thead><tr><th>Nutriente(s) indicado(s)</th><th>n</th><th>%</th></tr></thead><tbody><tr><td>Sódio</td><td>20</td><td>41,7</td></tr><tr><td>NAO</td><td>16</td><td>33,3</td></tr><tr><td>Gordura e sódio</td><td>11</td><td>22,9</td></tr><tr><td>Gordura</td><td>1</td><td>2,1</td></tr><tr class="total"><td>Total</td><td>48</td><td>100,0</td></tr></tbody></table></div><p class="nota"><i>Nota.</i> n = número de produtos; % = percentual sobre o total de produtos da linha Total.</p></figure></section><footer>Resultados agregados; gerado por <code>gerar_site.py</code> em 24/11/2026.</footer></main><script>
-const paginas=[...document.querySelectorAll('.pagina')], links=[...document.querySelectorAll('nav a[data-id]')];
-function mostra(){
-  const id=(location.hash||'#inicio').slice(1);
-  let achou=false;
-  paginas.forEach(p=>{const ok=p.id==='p-'+id;p.classList.toggle('ativa',ok);achou=achou||ok;});
-  if(!achou){document.getElementById('p-inicio').classList.add('ativa');}
-  links.forEach(a=>a.classList.toggle('ativo',a.dataset.id===id));
-  window.scrollTo(0,0);
-}
-addEventListener('hashchange',mostra);mostra();
-const btn=document.getElementById('tema'),raiz=document.documentElement;
-const escuro=()=>raiz.dataset.tema?raiz.dataset.tema==='escuro':matchMedia('(prefers-color-scheme:dark)').matches;
-function rotulo(){btn.textContent=escuro()?'☀ Modo claro':'🌙 Modo escuro';}
-btn.addEventListener('click',()=>{const t=escuro()?'claro':'escuro';raiz.dataset.tema=t;try{localStorage.setItem('tema',t);}catch(e){}rotulo();});
-rotulo();
-</script></body></html>
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-d0ae9245876894da5ac7e18953ecc5cc.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-f670ab49fb9634e9dab58972b11477cb.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-1beb5789083f19f8fb5f954f886869a9.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-f670ab49fb9634e9dab58972b11477cb.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Nenhum resultado",
+    "search-matching-documents-text": "documentos correspondentes",
+    "search-copy-link-title": "Copiar link para a busca",
+    "search-hide-matches-text": "Esconder correspondências adicionais",
+    "search-more-match-text": "mais correspondência neste documento",
+    "search-more-matches-text": "mais correspondências neste documento",
+    "search-clear-button-title": "Limpar",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Procurar"
+  }
+}</script>
+<link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+
+
+
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Rotulagem de cárneos da Bahia</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Procurar"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Alternar de navegação" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="https://github.com/CVDMR/Caroline-et-al"> 
+<span class="menu-text">App (Streamlit)</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Alternar modo escuro"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Início</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Início</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./dicionario.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Dicionário de variáveis</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Alternar seção">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./dicionario.html#tipos" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Resumo por tipo</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./dicionario.html#grupos" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Variáveis por grupo</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+ <span class="menu-text">Amostra e rotulagem</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Alternar seção">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./caracterizacao.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">1 · Caracterização</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Alternar seção">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./caracterizacao.html#perfil" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Perfil geral</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./caracterizacao.html#preco-peso" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preço e peso</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./caracterizacao.html#ingredientes" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Ingredientes e aditivos</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./conformidade.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2 · Conformidade da rotulagem</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Alternar seção">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./conformidade.html#itens" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Itens obrigatórios</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./conformidade.html#rnf" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Rotulagem frontal (RNF)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./conformidade.html#subgrupo" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Por subgrupo</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./conformidade.html#mapa" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Mapa produto × item</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./conformidade.html#nao-conformes" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Produtos não conformes</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
+ <span class="menu-text">Composição nutricional</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Alternar seção">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./bloco3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">3 · Composição</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Alternar seção">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./bloco3.html#rotulo" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Declarada no rótulo</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./bloco3.html#foodscan" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Medida no FoodScan</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./bloco3.html#sodio" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sódio (provisório)</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./bloco4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">4 · Rótulo × laboratório</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Alternar seção">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./bloco4.html#objetivo" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Objetivo e método</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./bloco4.html#descricao" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Descrição</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./bloco4.html#pareado" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Teste pareado</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./bloco4.html#concordancia" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Concordância</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./bloco4.html#graficos" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Gráficos por nutriente</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./bloco5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">5 · Conformidade nutricional</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="Alternar seção">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./bloco5.html#resultado" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Resultado por nutriente</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./bloco5.html#zero" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Rótulo igual a zero</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./bloco5.html#desvio" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Desvio em relação ao rótulo</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./bloco5.html#comparacao" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Comparação entre nutrientes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./bloco5.html#produto" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Conformidade por produto</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./relacoes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Relações entre variáveis</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="false" aria-label="Alternar seção">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./relacoes.html#preco-subgrupo" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preço × subgrupo</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./relacoes.html#rnf-ingredientes" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">RNF × nº de ingredientes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./relacoes.html#aditivos" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Nitrito, nitrato e glutamato</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./relacoes.html#aditivos-subgrupo" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Aditivos e subgrupo</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./relacoes.html#aditivos-associacao" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Associação entre aditivos (OR)</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Nesta página</h2>
+   
+  <ul>
+  <li><a href="#análises" id="toc-análises" class="nav-link active" data-scroll-target="#análises">Análises</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Rotulagem e composição de produtos cárneos da Bahia</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Relatório estatístico gerado em <strong>R</strong> com <strong>Quarto</strong> a partir da planilha original (que não é alterada). Os resultados são recalculados a cada renderização.</p>
+<ul>
+<li>Produtos analisados: <strong>48</strong></li>
+<li>Marcas/empresas: <strong>15</strong></li>
+<li>Subgrupos: <strong>7</strong></li>
+<li>Variáveis na planilha: <strong>52</strong> (sem as 2 excluídas por decisão do pesquisador)</li>
+</ul>
+<section id="análises" class="level2">
+<h2 class="anchored" data-anchor-id="análises">Análises</h2>
+<ol start="0" type="1">
+<li><a href="./dicionario.html">Dicionário de variáveis</a>: tipo, completude e resumo de cada variável da planilha.</li>
+<li><a href="./caracterizacao.html">Caracterização da amostra</a>: perfil por subgrupo e marca, preço, peso, ingredientes e aditivos.</li>
+<li><a href="./conformidade.html">Conformidade da rotulagem</a>: itens obrigatórios, rotulagem nutricional frontal (RNF) e conformidade por subgrupo.</li>
+<li><a href="./bloco3.html">Composição dos produtos</a>: nutrientes declarados no rótulo e medidos no FoodScan, por subgrupo.</li>
+<li><a href="./bloco4.html">Rótulo × laboratório (FoodScan)</a>: comparação do declarado no rótulo com o medido em laboratório (Wilcoxon pareado, Spearman, CCC, CCI e Bland-Altman).</li>
+<li><a href="./bloco5.html">Conformidade nutricional</a>: conformidade de cada produto e nutriente por duas regras lado a lado: a tolerância unilateral da RDC 429/2020 (120% e 80%) e a regra simétrica de ±20%.</li>
+<li><a href="./relacoes.html">Relações entre variáveis</a>: preço × subgrupo, RNF × nº de ingredientes e presença de nitrito, nitrato e glutamato.</li>
+</ol>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copiada");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copiada");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
