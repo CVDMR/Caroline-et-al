@@ -1,0 +1,128 @@
+---
+title: "1 · Caracterização da amostra"
+---
+
+```{r}
+source("R/dados.R")
+source("R/funcoes.R")
+df <- carrega_dados()
+```
+
+Amostra: **`r nrow(df)`** produtos.
+
+## Perfil geral dos produtos
+
+### Por subgrupo
+
+```{r}
+#| label: fig-subgrupo
+#| fig-cap: "Produtos por subgrupo."
+#| fig-height: 3.6
+barras_h(contagem(df$SUBGRUPO, "Subgrupo"))
+```
+
+```{r}
+#| label: tbl-subgrupo
+#| tbl-cap: "Distribuição dos produtos por subgrupo."
+tabela_gt(freq_tabela(df$SUBGRUPO, "Subgrupo"), NOTA_FREQ)
+```
+
+### Por marca/empresa
+
+```{r}
+#| label: fig-marca
+#| fig-cap: "Produtos por marca/empresa."
+#| fig-height: 6
+barras_h(contagem(df$MARCA_EMPRESA, "Marca/empresa"))
+```
+
+```{r}
+#| label: tbl-marca
+#| tbl-cap: "Distribuição dos produtos por marca/empresa."
+tabela_gt(freq_tabela(df$MARCA_EMPRESA, "Marca/empresa"), NOTA_FREQ)
+```
+
+## Preço e peso por subgrupo
+
+```{r}
+#| label: fig-box-preco-peso
+#| fig-cap: "Distribuição do preço por 100 g e do peso adquirido, por subgrupo (cada ponto é um produto)."
+#| fig-height: 4.2
+df |>
+  tidyr::pivot_longer(c(PRECO_100G, PESO_GRAMAS), names_to = "var", values_to = "valor") |>
+  mutate(var = factor(rotulo(var), levels = rotulo(c("PRECO_100G", "PESO_GRAMAS")))) |>
+  ggplot(aes(SUBGRUPO, valor)) +
+  geom_boxplot(fill = NA, colour = COR, outlier.shape = NA) +
+  geom_jitter(width = .15, height = 0, colour = COR, alpha = .7) +
+  facet_wrap(~var, scales = "free_y") +
+  labs(x = NULL, y = NULL) + tema_fig() +
+  theme(axis.text.x = element_text(angle = 40, hjust = 1))
+```
+
+```{r}
+#| label: tbl-preco
+#| tbl-cap: "Preço por 100 g (R$) segundo o subgrupo."
+tabela_gt(resumo_artigo(df, "PRECO_100G", "SUBGRUPO", casas = 2, rotulo_grupo = "Subgrupo"), NOTA_RESUMO)
+```
+
+```{r}
+#| label: tbl-peso
+#| tbl-cap: "Peso adquirido (g) segundo o subgrupo."
+tabela_gt(resumo_artigo(df, "PESO_GRAMAS", "SUBGRUPO", casas = 0, rotulo_grupo = "Subgrupo"), NOTA_RESUMO)
+```
+
+## Ingredientes e aditivos
+
+```{r}
+#| label: fig-ingredientes-aditivos
+#| fig-cap: "Número de ingredientes e de aditivos por produto."
+#| fig-height: 3.6
+df |>
+  tidyr::pivot_longer(c(NUMERO_INGREDIENTES, N_ADITIVOS), names_to = "var", values_to = "valor") |>
+  mutate(var = factor(rotulo(var), levels = rotulo(c("NUMERO_INGREDIENTES", "N_ADITIVOS")))) |>
+  ggplot(aes(valor)) +
+  geom_histogram(bins = 15, fill = COR, colour = "white") +
+  facet_wrap(~var, scales = "free_x") +
+  labs(x = NULL, y = "Produtos") + tema_fig()
+```
+
+```{r}
+#| label: tbl-ingredientes
+#| tbl-cap: "Número de ingredientes segundo o subgrupo."
+tabela_gt(resumo_artigo(df, "NUMERO_INGREDIENTES", "SUBGRUPO", casas = 1, rotulo_grupo = "Subgrupo"), NOTA_RESUMO)
+```
+
+```{r}
+#| label: tbl-aditivos
+#| tbl-cap: "Número de aditivos segundo o subgrupo."
+tabela_gt(resumo_artigo(df, "N_ADITIVOS", "SUBGRUPO", casas = 1, rotulo_grupo = "Subgrupo"), NOTA_RESUMO)
+```
+
+### Glutamato, nitrato e nitrito
+
+```{r}
+adit <- intersect(c("GLUTAMATO_PRESENCA", "NITRATO_PRESENCA", "NITRITO_PRESENCA"), names(df))
+pres <- data.frame(
+  item = rotulo(adit),
+  n = sapply(adit, function(a) sum(df[[a]] == 1, na.rm = TRUE)),
+  N = sapply(adit, function(a) sum(!is.na(df[[a]])))
+)
+pres$pct <- 100 * pres$n / pres$N
+```
+
+```{r}
+#| label: fig-aditivos
+#| fig-cap: "Percentual de produtos com presença de glutamato, nitrato e nitrito."
+#| fig-height: 3.4
+ggplot(pres, aes(item, pct)) +
+  geom_col(fill = COR, width = .6) +
+  geom_text(aes(label = paste0(fmt(pct, 0), "%")), vjust = -0.5) +
+  scale_y_continuous(limits = c(0, 100), expand = expansion(mult = c(0, .05))) +
+  labs(x = NULL, y = "% de produtos com presença") + tema_fig()
+```
+
+```{r}
+#| label: tbl-presenca-aditivos
+#| tbl-cap: "Presença de glutamato, nitrato e nitrito nos produtos."
+tabela_gt(proporcao_tabela(pres, "Aditivo", "Presença (n)", ordenar = FALSE), NOTA_PROP)
+```

@@ -1,0 +1,180 @@
+---
+title: "4 · Rótulo × laboratório (FoodScan)"
+---
+
+```{r}
+source("R/dados.R")
+source("R/funcoes.R")
+source("R/concordancia.R")
+library(gtsummary)
+theme_gtsummary_language("pt", decimal.mark = ",", big.mark = ".")
+theme_gtsummary_compact()
+df <- carrega_dados()
+col_excel <- attr(df, "col_excel")
+```
+
+## Objetivo e método
+
+Comparar o valor **declarado no rótulo** com o valor **medido em laboratório (FoodScan)** para
+proteína, gordura total, carboidratos, energia e sódio, nos produtos que têm os dois valores.
+A diferença é sempre calculada como **rótulo − laboratório**.
+
+| Pergunta | Análise |
+|---|---|
+| Os valores centrais diferem? | Teste de Wilcoxon pareado, com diferença mediana (pseudomediana) e IC 95%; valores de *p* ajustados por Holm entre os cinco nutrientes |
+| Os produtos mantêm a mesma ordem? | Correlação de Spearman, com IC 95% |
+| Há concordância (e não só associação)? | Coeficiente de concordância de Lin (CCC) e coeficiente de correlação intraclasse (CCI, modelo *two-way*, concordância absoluta), ambos com IC 95% |
+| Qual o tamanho do erro e sua variação? | Bland-Altman: viés (IC 95%) e limites de concordância de 95% |
+
+Nível de significância de 5%. Nenhum valor foi excluído. A energia do laboratório foi obtida
+convertendo o valor em kJ para kcal (kJ ÷ 4,184).
+
+```{r}
+pares <- lapply(PARES$nutriente, \(n) pareia(df, n)) |> setNames(PARES$nutriente)
+res <- bind_rows(lapply(PARES$nutriente, \(n) resume_concordancia(pares[[n]], n))) |>
+  mutate(p_holm = p.adjust(p_wilcoxon, method = "holm"))
+
+# conferência da conversão de energia (kJ/4,184) com a coluna kcal já existente na planilha
+conf <- df |> filter(!is.na(ENERGIA_LAB_KCAL_100G)) |>
+  summarise(max_dif_pct = max(abs(ENERGIA_LAB_KCAL_CONV_100G - ENERGIA_LAB_KCAL_100G) /
+                              ENERGIA_LAB_KCAL_100G) * 100)
+```
+
+Produtos com valor de laboratório: **`r max(res$n)`** de `r nrow(df)`.
+
+## Descrição: rótulo e laboratório
+
+```{r}
+#| label: tbl-descritiva
+#| tbl-cap: "Valores declarados no rótulo e medidos em laboratório, por 100 g (mediana [Q1–Q3])."
+amostra <- df |> filter(!is.na(PROTEINA_LAB_G_100G))
+larga <- do.call(cbind, lapply(seq_len(nrow(PARES)), function(i) {
+  x <- amostra[, c(PARES$rotulo[i], PARES$lab[i])]
+  names(x) <- paste0(PARES$nutriente[i], c(" – rótulo", " – laboratório"))
+  x
+}))
+tbl_summary(
+  larga,
+  statistic = all_continuous() ~ "{median} [{p25}–{p75}]",
+  digits = all_continuous() ~ 1,
+  missing = "no"
+) |>
+  modify_header(label ~ "**Variável**") |>
+  as_gt() |>
+  tab_source_note("Unidades: g/100 g (proteína, gordura, carboidratos), kcal/100 g (energia) e mg/100 g (sódio).")
+```
+
+## Teste pareado: o rótulo difere do laboratório?
+
+```{r}
+#| label: tbl-wilcoxon
+#| tbl-cap: "Teste de Wilcoxon pareado (rótulo − laboratório)."
+fp <- function(p) ifelse(p < 0.001, "<0,001", formatC(p, format = "f", digits = 3, decimal.mark = ","))
+res |>
+  transmute(
+    Nutriente, n,
+    `Diferença mediana [IC 95%]` = paste0(fmt(dif_med, 2), " [", fmt(dif_lo, 2), "; ", fmt(dif_hi, 2), "]"),
+    `p` = fp(p_wilcoxon), `p (Holm)` = fp(p_holm)
+  ) |>
+  as.data.frame() |>
+  tabela_gt("Diferença mediana = pseudomediana das diferenças pareadas (rótulo − laboratório). Holm: correção para os cinco nutrientes.")
+```
+
+## Concordância
+
+```{r}
+#| label: tbl-concordancia
+#| tbl-cap: "Associação e concordância entre rótulo e laboratório."
+ic <- function(e, l, h, d = 2) paste0(fmt(e, d), " [", fmt(l, d), "; ", fmt(h, d), "]")
+res |>
+  transmute(
+    Nutriente,
+    `Spearman` = ic(rho, rho_lo, rho_hi),
+    `CCC de Lin` = ic(ccc, ccc_lo, ccc_hi),
+    `CCI` = ic(icc, icc_lo, icc_hi),
+    `Viés (Bland-Altman)` = ic(vies, vies_lo, vies_hi),
+    `Limites de concordância` = paste0(fmt(loa_inf, 2), " a ", fmt(loa_sup, 2))
+  ) |>
+  as.data.frame() |>
+  tabela_gt("Valores como estimativa [IC 95%]. Viés e limites na unidade de cada nutriente.")
+```
+
+## Gráficos por nutriente
+
+À esquerda, dispersão com a linha de identidade (pontos sobre a linha = rótulo igual ao laboratório).
+À direita, Bland-Altman: linha cheia = viés; tracejadas = limites de concordância de 95%.
+Os produtos fora dos limites aparecem identificados.
+
+### Proteína
+
+```{r}
+#| fig-width: 10
+#| fig-height: 4.6
+#| fig-cap: "Proteína (g/100 g): dispersão e Bland-Altman."
+graficos_concordancia(pares[["Proteína"]], filter(res, Nutriente == "Proteína"), "Proteína", "g/100 g")
+```
+
+### Gordura total
+
+```{r}
+#| fig-width: 10
+#| fig-height: 4.6
+#| fig-cap: "Gordura total (g/100 g): dispersão e Bland-Altman."
+graficos_concordancia(pares[["Gordura total"]], filter(res, Nutriente == "Gordura total"), "Gordura total", "g/100 g")
+```
+
+### Carboidratos
+
+```{r}
+#| fig-width: 10
+#| fig-height: 4.6
+#| fig-cap: "Carboidratos (g/100 g): dispersão e Bland-Altman."
+graficos_concordancia(pares[["Carboidratos"]], filter(res, Nutriente == "Carboidratos"), "Carboidratos", "g/100 g")
+```
+
+### Energia
+
+```{r}
+#| fig-width: 10
+#| fig-height: 4.6
+#| fig-cap: "Energia (kcal/100 g; laboratório convertido de kJ): dispersão e Bland-Altman."
+graficos_concordancia(pares[["Energia"]], filter(res, Nutriente == "Energia"), "Energia", "kcal/100 g")
+```
+
+A conversão kJ ÷ 4,184 difere da coluna de kcal já presente na planilha em no máximo
+**`r fmt(conf$max_dif_pct, 1)`%** (por produto).
+
+### Sódio
+
+::: {.callout-warning}
+## Resultados provisórios
+Há valores de sódio de laboratório muito altos (acima de 11.800 mg/100 g). Eles **não foram
+excluídos**; a checagem (unidade, digitação ou valor real) ainda está pendente, e as estatísticas
+de sódio devem ser lidas com cautela.
+:::
+
+```{r}
+#| fig-width: 10
+#| fig-height: 4.6
+#| fig-cap: "Sódio (mg/100 g): dispersão e Bland-Altman."
+graficos_concordancia(pares[["Sódio"]], filter(res, Nutriente == "Sódio"), "Sódio", "mg/100 g")
+```
+
+```{r}
+#| label: tbl-extremos-sodio
+#| tbl-cap: "Cinco maiores valores de sódio de laboratório e sua posição na planilha."
+cl <- col_excel[["SODIO_LAB_MG_100G"]]; cr <- col_excel[["SODIO_ROT_100G"]]
+pares[["Sódio"]] |>
+  arrange(desc(lab)) |>
+  slice_head(n = 5) |>
+  transmute(
+    Produto = ID,
+    `Linha na planilha` = LINHA_EXCEL,
+    `Célula (laboratório)` = paste0(cl, LINHA_EXCEL),
+    `Sódio – laboratório` = fmt(lab, 1),
+    `Célula (rótulo)` = paste0(cr, LINHA_EXCEL),
+    `Sódio – rótulo` = fmt(rot, 0)
+  ) |>
+  as.data.frame() |>
+  tabela_gt("Produtos ordenados do maior para o menor valor de laboratório; nenhum valor foi excluído.")
+```

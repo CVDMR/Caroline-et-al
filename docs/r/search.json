@@ -1,0 +1,128 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Rotulagem e composição de produtos cárneos da Bahia",
+    "section": "",
+    "text": "Relatório estatístico gerado em R com Quarto a partir da planilha original (que não é alterada). Os resultados são recalculados a cada renderização."
+  },
+  {
+    "objectID": "index.html#análises",
+    "href": "index.html#análises",
+    "title": "Rotulagem e composição de produtos cárneos da Bahia",
+    "section": "Análises",
+    "text": "Análises\n\nCaracterização da amostra: perfil por subgrupo e marca, preço, peso, ingredientes e aditivos.\nConformidade da rotulagem: itens obrigatórios, rotulagem nutricional frontal (RNF) e conformidade por subgrupo.\nRótulo × laboratório (FoodScan): comparação do declarado no rótulo com o medido em laboratório (Wilcoxon pareado, Spearman, CCC, CCI e Bland-Altman)."
+  },
+  {
+    "objectID": "caracterizacao.html",
+    "href": "caracterizacao.html",
+    "title": "1 · Caracterização da amostra",
+    "section": "",
+    "text": "Amostra: 48 produtos."
+  },
+  {
+    "objectID": "caracterizacao.html#perfil-geral-dos-produtos",
+    "href": "caracterizacao.html#perfil-geral-dos-produtos",
+    "title": "1 · Caracterização da amostra",
+    "section": "Perfil geral dos produtos",
+    "text": "Perfil geral dos produtos\n\nPor subgrupo\n\n\n\n\n\n\n\n\nFigura 1: Produtos por subgrupo.\n\n\n\n\n\n\n\n\n\nTabela 1: Distribuição dos produtos por subgrupo.\n\n\n\n\n\n\n\n\n\nSubgrupo\nn\n%\n\n\n\n\nTemperado\n14\n29,2\n\n\nSalgado\n10\n20,8\n\n\nEmulsionado\n8\n16,7\n\n\nDefumado\n8\n16,7\n\n\nSalgado e defumado\n4\n8,3\n\n\nLinguiça\n3\n6,3\n\n\nSalgado e dessecado\n1\n2,1\n\n\nTotal\n48\n100,0\n\n\n\nNota. n = número de produtos; % = percentual sobre o total de produtos da linha Total.\n\n\n\n\n\n\n\n\n\n\n\n\n\nPor marca/empresa\n\n\n\n\n\n\n\n\nFigura 2: Produtos por marca/empresa.\n\n\n\n\n\n\n\n\n\nTabela 2: Distribuição dos produtos por marca/empresa.\n\n\n\n\n\n\n\n\n\nMarca/empresa\nn\n%\n\n\n\n\nM03\n15\n31,3\n\n\nM12\n7\n14,6\n\n\nM05\n5\n10,4\n\n\nM09\n4\n8,3\n\n\nM02\n3\n6,3\n\n\nM01\n2\n4,2\n\n\nM04\n2\n4,2\n\n\nM06\n2\n4,2\n\n\nM14\n2\n4,2\n\n\nM07\n1\n2,1\n\n\nM08\n1\n2,1\n\n\nM10\n1\n2,1\n\n\nM11\n1\n2,1\n\n\nM13\n1\n2,1\n\n\nM15\n1\n2,1\n\n\nTotal\n48\n100,0\n\n\n\nNota. n = número de produtos; % = percentual sobre o total de produtos da linha Total."
+  },
+  {
+    "objectID": "caracterizacao.html#preço-e-peso-por-subgrupo",
+    "href": "caracterizacao.html#preço-e-peso-por-subgrupo",
+    "title": "1 · Caracterização da amostra",
+    "section": "Preço e peso por subgrupo",
+    "text": "Preço e peso por subgrupo\n\n\n\n\n\n\n\n\nFigura 3: Distribuição do preço por 100 g e do peso adquirido, por subgrupo (cada ponto é um produto).\n\n\n\n\n\n\n\n\n\nTabela 3: Preço por 100 g (R$) segundo o subgrupo.\n\n\n\n\n\n\n\n\n\nSubgrupo\nn\nMédia (DP)\nMediana (Q1–Q3)\nMín–Máx\n\n\n\n\nDefumado\n8\n4,55 (1,84)\n4,65 (3,31–5,25)\n2,36–7,80\n\n\nEmulsionado\n8\n2,34 (2,44)\n1,11 (0,91–2,54)\n0,80–6,28\n\n\nLinguiça\n3\n1,81 (0,51)\n2,00 (1,62–2,10)\n1,24–2,20\n\n\nSalgado\n10\n4,71 (1,76)\n4,55 (4,41–4,97)\n2,48–8,99\n\n\nSalgado e defumado\n4\n3,10 (0,69)\n3,30 (2,91–3,48)\n2,11–3,69\n\n\nSalgado e dessecado\n1\n4,17 (–)\n4,17 (4,17–4,17)\n4,17–4,17\n\n\nTemperado\n14\n2,65 (2,07)\n2,00 (1,71–2,41)\n1,09–8,70\n\n\nTotal\n48\n3,36 (2,08)\n2,47 (1,87–4,68)\n0,80–8,99\n\n\n\nNota. n = número de produtos com informação; DP = desvio padrão; Q1–Q3 = primeiro e terceiro quartis; Mín–Máx = menor e maior valor.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTabela 4: Peso adquirido (g) segundo o subgrupo.\n\n\n\n\n\n\n\n\n\nSubgrupo\nn\nMédia (DP)\nMediana (Q1–Q3)\nMín–Máx\n\n\n\n\nDefumado\n8\n320 (71)\n306 (270–317)\n268–482\n\n\nEmulsionado\n8\n2756 (1582)\n2516 (2072–3762)\n640–5000\n\n\nLinguiça\n3\n4167 (1443)\n5000 (3750–5000)\n2500–5000\n\n\nSalgado\n10\n456 (367)\n346 (322–370)\n172–1458\n\n\nSalgado e defumado\n4\n2813 (2668)\n2791 (504–5100)\n500–5170\n\n\nSalgado e dessecado\n1\n5000 (–)\n5000 (5000–5000)\n5000–5000\n\n\nTemperado\n14\n930 (178)\n1000 (1000–1000)\n500–1000\n\n\nTotal\n48\n1478 (1627)\n1000 (356–1719)\n172–5170\n\n\n\nNota. n = número de produtos com informação; DP = desvio padrão; Q1–Q3 = primeiro e terceiro quartis; Mín–Máx = menor e maior valor."
+  },
+  {
+    "objectID": "caracterizacao.html#ingredientes-e-aditivos",
+    "href": "caracterizacao.html#ingredientes-e-aditivos",
+    "title": "1 · Caracterização da amostra",
+    "section": "Ingredientes e aditivos",
+    "text": "Ingredientes e aditivos\n\n\n\n\n\n\n\n\nFigura 4: Número de ingredientes e de aditivos por produto.\n\n\n\n\n\n\n\n\n\nTabela 5: Número de ingredientes segundo o subgrupo.\n\n\n\n\n\n\n\n\n\nSubgrupo\nn\nMédia (DP)\nMediana (Q1–Q3)\nMín–Máx\n\n\n\n\nDefumado\n8\n7,0 (0,0)\n7,0 (7,0–7,0)\n7,0–7,0\n\n\nEmulsionado\n8\n19,1 (4,5)\n19,0 (16,3–21,8)\n13,0–26,0\n\n\nLinguiça\n3\n18,3 (3,1)\n19,0 (17,0–20,0)\n15,0–21,0\n\n\nSalgado\n9\n4,0 (1,7)\n4,0 (2,0–5,0)\n2,0–7,0\n\n\nSalgado e defumado\n4\n11,5 (1,0)\n11,0 (11,0–11,5)\n11,0–13,0\n\n\nSalgado e dessecado\n1\n2,0 (–)\n2,0 (2,0–2,0)\n2,0–2,0\n\n\nTemperado\n14\n14,6 (3,2)\n15,0 (15,0–16,0)\n4,0–17,0\n\n\nTotal\n47\n11,8 (6,3)\n13,0 (7,0–16,0)\n2,0–26,0\n\n\n\nNota. n = número de produtos com informação; DP = desvio padrão; Q1–Q3 = primeiro e terceiro quartis; Mín–Máx = menor e maior valor.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTabela 6: Número de aditivos segundo o subgrupo.\n\n\n\n\n\n\n\n\n\nSubgrupo\nn\nMédia (DP)\nMediana (Q1–Q3)\nMín–Máx\n\n\n\n\nDefumado\n8\n4,0 (0,0)\n4,0 (4,0–4,0)\n4,0–4,0\n\n\nEmulsionado\n8\n8,8 (3,6)\n9,0 (6,3–12,0)\n4,0–13,0\n\n\nLinguiça\n3\n12,0 (5,0)\n12,0 (9,5–14,5)\n7,0–17,0\n\n\nSalgado\n9\n1,3 (1,3)\n1,0 (0,0–2,0)\n0,0–4,0\n\n\nSalgado e defumado\n4\n6,3 (1,5)\n7,0 (6,3–7,0)\n4,0–7,0\n\n\nSalgado e dessecado\n1\n0,0 (–)\n0,0 (0,0–0,0)\n0,0–0,0\n\n\nTemperado\n14\n3,1 (1,4)\n3,0 (3,0–3,0)\n0,0–7,0\n\n\nTotal\n47\n4,7 (3,8)\n4,0 (3,0–7,0)\n0,0–17,0\n\n\n\nNota. n = número de produtos com informação; DP = desvio padrão; Q1–Q3 = primeiro e terceiro quartis; Mín–Máx = menor e maior valor.\n\n\n\n\n\n\n\n\n\n\n\n\nGlutamato, nitrato e nitrito\n\n\n\n\n\n\n\n\nFigura 5: Percentual de produtos com presença de glutamato, nitrato e nitrito.\n\n\n\n\n\n\n\n\n\nTabela 7: Presença de glutamato, nitrato e nitrito nos produtos.\n\n\n\n\n\n\n\n\n\nAditivo\nPresença (n)\nVálidos (N)\n%\n\n\n\n\nPresença de glutamato\n20\n47\n42,6\n\n\nPresença de nitrato\n22\n47\n46,8\n\n\nPresença de nitrito\n27\n47\n57,4\n\n\n\nNota. Percentual calculado sobre os produtos com informação (células em branco excluídas)."
+  },
+  {
+    "objectID": "bloco4.html",
+    "href": "bloco4.html",
+    "title": "4 · Rótulo × laboratório (FoodScan)",
+    "section": "",
+    "text": "Comparar o valor declarado no rótulo com o valor medido em laboratório (FoodScan) para proteína, gordura total, carboidratos, energia e sódio, nos produtos que têm os dois valores. A diferença é sempre calculada como rótulo − laboratório.\n\n\n\n\n\n\n\nPergunta\nAnálise\n\n\n\n\nOs valores centrais diferem?\nTeste de Wilcoxon pareado, com diferença mediana (pseudomediana) e IC 95%; valores de p ajustados por Holm entre os cinco nutrientes\n\n\nOs produtos mantêm a mesma ordem?\nCorrelação de Spearman, com IC 95%\n\n\nHá concordância (e não só associação)?\nCoeficiente de concordância de Lin (CCC) e coeficiente de correlação intraclasse (CCI, modelo two-way, concordância absoluta), ambos com IC 95%\n\n\nQual o tamanho do erro e sua variação?\nBland-Altman: viés (IC 95%) e limites de concordância de 95%\n\n\n\nNível de significância de 5%. Nenhum valor foi excluído. A energia do laboratório foi obtida convertendo o valor em kJ para kcal (kJ ÷ 4,184).\nProdutos com valor de laboratório: 32 de 48."
+  },
+  {
+    "objectID": "bloco4.html#objetivo-e-método",
+    "href": "bloco4.html#objetivo-e-método",
+    "title": "4 · Rótulo × laboratório (FoodScan)",
+    "section": "",
+    "text": "Comparar o valor declarado no rótulo com o valor medido em laboratório (FoodScan) para proteína, gordura total, carboidratos, energia e sódio, nos produtos que têm os dois valores. A diferença é sempre calculada como rótulo − laboratório.\n\n\n\n\n\n\n\nPergunta\nAnálise\n\n\n\n\nOs valores centrais diferem?\nTeste de Wilcoxon pareado, com diferença mediana (pseudomediana) e IC 95%; valores de p ajustados por Holm entre os cinco nutrientes\n\n\nOs produtos mantêm a mesma ordem?\nCorrelação de Spearman, com IC 95%\n\n\nHá concordância (e não só associação)?\nCoeficiente de concordância de Lin (CCC) e coeficiente de correlação intraclasse (CCI, modelo two-way, concordância absoluta), ambos com IC 95%\n\n\nQual o tamanho do erro e sua variação?\nBland-Altman: viés (IC 95%) e limites de concordância de 95%\n\n\n\nNível de significância de 5%. Nenhum valor foi excluído. A energia do laboratório foi obtida convertendo o valor em kJ para kcal (kJ ÷ 4,184).\nProdutos com valor de laboratório: 32 de 48."
+  },
+  {
+    "objectID": "bloco4.html#descrição-rótulo-e-laboratório",
+    "href": "bloco4.html#descrição-rótulo-e-laboratório",
+    "title": "4 · Rótulo × laboratório (FoodScan)",
+    "section": "Descrição: rótulo e laboratório",
+    "text": "Descrição: rótulo e laboratório\n\n\n\n\nTabela 1: Valores declarados no rótulo e medidos em laboratório, por 100 g (mediana [Q1–Q3]).\n\n\n\n\n\n\n\n\n\nVariável\nN = 321\n\n\n\n\nProteína – rótulo\n14,0 [10,0–17,0]\n\n\nProteína – laboratório\n15,9 [13,0–18,9]\n\n\nGordura total – rótulo\n13,0 [9,8–21,0]\n\n\nGordura total – laboratório\n15,1 [7,7–22,6]\n\n\nCarboidratos – rótulo\n0,6 [0,0–2,3]\n\n\nCarboidratos – laboratório\n3,3 [1,2–9,2]\n\n\nEnergia – rótulo\n191,5 [133,0–236,0]\n\n\nEnergia – laboratório\n221,0 [156,4–309,1]\n\n\nSódio – rótulo\n2.738,0 [635,0–3.784,0]\n\n\nSódio – laboratório\n2.771,7 [1.900,0–5.875,0]\n\n\n\n1 Mediana [Q1–Q3]\n\n\nUnidades: g/100 g (proteína, gordura, carboidratos), kcal/100 g (energia) e mg/100 g (sódio)."
+  },
+  {
+    "objectID": "bloco4.html#teste-pareado-o-rótulo-difere-do-laboratório",
+    "href": "bloco4.html#teste-pareado-o-rótulo-difere-do-laboratório",
+    "title": "4 · Rótulo × laboratório (FoodScan)",
+    "section": "Teste pareado: o rótulo difere do laboratório?",
+    "text": "Teste pareado: o rótulo difere do laboratório?\n\n\n\n\nTabela 2: Teste de Wilcoxon pareado (rótulo − laboratório).\n\n\n\n\n\n\n\n\n\nNutriente\nn\nDiferença mediana [IC 95%]\np\np (Holm)\n\n\n\n\nProteína\n32\n-2,35 [-5,08; -0,58]\n0,010\n0,030\n\n\nGordura total\n32\n1,10 [-4,00; 4,36]\n0,594\n0,832\n\n\nCarboidratos\n32\n-3,65 [-5,13; -1,35]\n&lt;0,001\n&lt;0,001\n\n\nEnergia\n32\n-24,92 [-69,40; 18,91]\n0,416\n0,832\n\n\nSódio\n32\n-1406,76 [-2099,35; -637,00]\n0,004\n0,015\n\n\n\nNota. Diferença mediana = pseudomediana das diferenças pareadas (rótulo − laboratório). Holm: correção para os cinco nutrientes."
+  },
+  {
+    "objectID": "bloco4.html#concordância",
+    "href": "bloco4.html#concordância",
+    "title": "4 · Rótulo × laboratório (FoodScan)",
+    "section": "Concordância",
+    "text": "Concordância\n\n\n\n\nTabela 3: Associação e concordância entre rótulo e laboratório.\n\n\n\n\n\n\n\n\n\nNutriente\nSpearman\nCCC de Lin\nCCI\nViés (Bland-Altman)\nLimites de concordância\n\n\n\n\nProteína\n0,34 [-0,01; 0,62]\n0,36 [0,07; 0,60]\n0,37 [0,04; 0,63]\n-3,05 [-5,08; -1,02]\n-14,08 a 7,98\n\n\nGordura total\n0,49 [0,17; 0,71]\n0,52 [0,22; 0,73]\n0,53 [0,23; 0,74]\n-0,38 [-4,80; 4,04]\n-24,40 a 23,64\n\n\nCarboidratos\n0,32 [-0,04; 0,60]\n0,14 [-0,03; 0,30]\n0,14 [-0,11; 0,41]\n-4,00 [-5,86; -2,13]\n-14,15 a 6,16\n\n\nEnergia\n0,31 [-0,04; 0,59]\n0,41 [0,10; 0,65]\n0,42 [0,10; 0,66]\n-33,14 [-76,30; 10,01]\n-267,76 a 201,47\n\n\nSódio\n0,54 [0,24; 0,75]\n0,68 [0,50; 0,81]\n0,69 [0,38; 0,85]\n-1383,42 [-2263,74; -503,10]\n-6169,11 a 3402,28\n\n\n\nNota. Valores como estimativa [IC 95%]. Viés e limites na unidade de cada nutriente."
+  },
+  {
+    "objectID": "bloco4.html#gráficos-por-nutriente",
+    "href": "bloco4.html#gráficos-por-nutriente",
+    "title": "4 · Rótulo × laboratório (FoodScan)",
+    "section": "Gráficos por nutriente",
+    "text": "Gráficos por nutriente\nÀ esquerda, dispersão com a linha de identidade (pontos sobre a linha = rótulo igual ao laboratório). À direita, Bland-Altman: linha cheia = viés; tracejadas = limites de concordância de 95%. Os produtos fora dos limites aparecem identificados.\n\nProteína\n\n\n\n\n\nProteína (g/100 g): dispersão e Bland-Altman.\n\n\n\n\n\n\nGordura total\n\n\n\n\n\nGordura total (g/100 g): dispersão e Bland-Altman.\n\n\n\n\n\n\nCarboidratos\n\n\n\n\n\nCarboidratos (g/100 g): dispersão e Bland-Altman.\n\n\n\n\n\n\nEnergia\n\n\n\n\n\nEnergia (kcal/100 g; laboratório convertido de kJ): dispersão e Bland-Altman.\n\n\n\n\nA conversão kJ ÷ 4,184 difere da coluna de kcal já presente na planilha em no máximo 2,1% (por produto).\n\n\nSódio\n\n\n\n\n\n\nAvisoResultados provisórios\n\n\n\nHá valores de sódio de laboratório muito altos (acima de 11.800 mg/100 g). Eles não foram excluídos; a checagem (unidade, digitação ou valor real) ainda está pendente, e as estatísticas de sódio devem ser lidas com cautela.\n\n\n\n\n\n\n\nSódio (mg/100 g): dispersão e Bland-Altman.\n\n\n\n\n\n\n\n\nTabela 4: Cinco maiores valores de sódio de laboratório e sua posição na planilha.\n\n\n\n\n\n\n\n\n\nProduto\nLinha na planilha\nCélula (laboratório)\nSódio – laboratório\nCélula (rótulo)\nSódio – rótulo\n\n\n\n\nP009\n10\nBB10\n13383,3\nAD10\n8738\n\n\nP011\n12\nBB12\n12976,7\nAD12\n7344\n\n\nP008\n9\nBB9\n12323,3\nAD9\n7900\n\n\nP020\n21\nBB21\n12000,0\nAD21\n7308\n\n\nP043\n44\nBB44\n11876,7\nAD44\n3735\n\n\n\nNota. Produtos ordenados do maior para o menor valor de laboratório; nenhum valor foi excluído."
+  },
+  {
+    "objectID": "conformidade.html",
+    "href": "conformidade.html",
+    "title": "2 · Conformidade da rotulagem",
+    "section": "",
+    "text": "Percentual de produtos que apresentam / estão em conformidade com cada item (1 = sim/conforme). Células em branco ficam fora do denominador.\n\n\n\n\n\n\n\n\nFigura 1: Conformidade dos produtos quanto aos itens obrigatórios de rotulagem.\n\n\n\n\n\n\n\n\n\nTabela 1: Conformidade dos produtos quanto aos itens obrigatórios de rotulagem.\n\n\n\n\n\n\n\n\n\nItem\nConformes (n)\nVálidos (N)\n%\n\n\n\n\nConteúdo líquido\n48\n48\n100,0\n\n\nDeclaração sobre glúten\n48\n48\n100,0\n\n\nDenominação de venda\n48\n48\n100,0\n\n\nIdentificação do produtor\n48\n48\n100,0\n\n\nLote\n48\n48\n100,0\n\n\nOrientação de armazenamento\n48\n48\n100,0\n\n\nPorção declarada\n48\n48\n100,0\n\n\nSelo de inspeção\n48\n48\n100,0\n\n\nTabela nutricional\n48\n48\n100,0\n\n\nValidade\n48\n48\n100,0\n\n\nLista de ingredientes\n47\n48\n97,9\n\n\nConformidade da tabela nutricional\n39\n48\n81,3\n\n\n\nNota. Percentual calculado sobre os produtos com informação (células em branco excluídas)."
+  },
+  {
+    "objectID": "conformidade.html#itens-obrigatórios-de-rotulagem",
+    "href": "conformidade.html#itens-obrigatórios-de-rotulagem",
+    "title": "2 · Conformidade da rotulagem",
+    "section": "",
+    "text": "Percentual de produtos que apresentam / estão em conformidade com cada item (1 = sim/conforme). Células em branco ficam fora do denominador.\n\n\n\n\n\n\n\n\nFigura 1: Conformidade dos produtos quanto aos itens obrigatórios de rotulagem.\n\n\n\n\n\n\n\n\n\nTabela 1: Conformidade dos produtos quanto aos itens obrigatórios de rotulagem.\n\n\n\n\n\n\n\n\n\nItem\nConformes (n)\nVálidos (N)\n%\n\n\n\n\nConteúdo líquido\n48\n48\n100,0\n\n\nDeclaração sobre glúten\n48\n48\n100,0\n\n\nDenominação de venda\n48\n48\n100,0\n\n\nIdentificação do produtor\n48\n48\n100,0\n\n\nLote\n48\n48\n100,0\n\n\nOrientação de armazenamento\n48\n48\n100,0\n\n\nPorção declarada\n48\n48\n100,0\n\n\nSelo de inspeção\n48\n48\n100,0\n\n\nTabela nutricional\n48\n48\n100,0\n\n\nValidade\n48\n48\n100,0\n\n\nLista de ingredientes\n47\n48\n97,9\n\n\nConformidade da tabela nutricional\n39\n48\n81,3\n\n\n\nNota. Percentual calculado sobre os produtos com informação (células em branco excluídas)."
+  },
+  {
+    "objectID": "conformidade.html#rotulagem-nutricional-frontal-rnf",
+    "href": "conformidade.html#rotulagem-nutricional-frontal-rnf",
+    "title": "2 · Conformidade da rotulagem",
+    "section": "Rotulagem nutricional frontal (RNF)",
+    "text": "Rotulagem nutricional frontal (RNF)\nMédia de alertas na RNF: 0,90.\n\n\n\n\nTabela 2: Rotulagem nutricional frontal (RNF) nos produtos.\n\n\n\n\n\n\n\n\n\nIndicador\nn\nVálidos (N)\n%\n\n\n\n\nRNF exigida\n36\n48\n75,0\n\n\nRNF presente (entre as exigidas)\n32\n36\n88,9\n\n\nRNF conforme (entre as presentes)\n27\n32\n84,4\n\n\n\nNota. RNF = rotulagem nutricional frontal. A base (N) de cada linha é o grupo indicado no rótulo da linha.\n\n\n\n\n\n\n\n\n\n\n\n\nNúmero de alertas\n\n\n\n\n\n\n\n\nFigura 2: Número de alertas na RNF.\n\n\n\n\n\n\n\n\n\nTabela 3: Distribuição dos produtos segundo o número de alertas na RNF.\n\n\n\n\n\n\n\n\n\nNº de alertas\nn\n%\n\n\n\n\n0\n16\n33,3\n\n\n1\n21\n43,8\n\n\n2\n11\n22,9\n\n\nTotal\n48\n100,0\n\n\n\nNota. n = número de produtos; % = percentual sobre o total de produtos da linha Total.\n\n\n\n\n\n\n\n\n\n\n\n\n\nNutriente(s) indicado(s)\n\n\n\n\n\n\n\n\nFigura 3: Nutriente(s) indicado(s) na RNF.\n\n\n\n\n\n\n\n\n\nTabela 4: Distribuição dos produtos segundo o(s) nutriente(s) indicado(s) na RNF.\n\n\n\n\n\n\n\n\n\nNutriente(s) indicado(s)\nn\n%\n\n\n\n\nSódio\n20\n41,7\n\n\nNAO\n16\n33,3\n\n\nGordura e sódio\n11\n22,9\n\n\nGordura\n1\n2,1\n\n\nTotal\n48\n100,0\n\n\n\nNota. n = número de produtos; % = percentual sobre o total de produtos da linha Total."
+  },
+  {
+    "objectID": "conformidade.html#conformidade-por-subgrupo",
+    "href": "conformidade.html#conformidade-por-subgrupo",
+    "title": "2 · Conformidade da rotulagem",
+    "section": "Conformidade por subgrupo",
+    "text": "Conformidade por subgrupo\n\n\n\n\n\n\n\n\nFigura 4: Percentual de conformidade por item e subgrupo.\n\n\n\n\n\n\n\n\n\nTabela 5: Percentual de conformidade dos itens obrigatórios segundo o subgrupo.\n\n\n\n\n\n\n\n\n\nItem\nDefumado\nEmulsionado\nLinguiça\nSalgado\nSalgado e defumado\nSalgado e dessecado\nTemperado\n\n\n\n\nDenominação de venda\n100,0\n100,0\n100,0\n100,0\n100,0\n100,0\n100,0\n\n\nIdentificação do produtor\n100,0\n100,0\n100,0\n100,0\n100,0\n100,0\n100,0\n\n\nConteúdo líquido\n100,0\n100,0\n100,0\n100,0\n100,0\n100,0\n100,0\n\n\nLote\n100,0\n100,0\n100,0\n100,0\n100,0\n100,0\n100,0\n\n\nValidade\n100,0\n100,0\n100,0\n100,0\n100,0\n100,0\n100,0\n\n\nPorção declarada\n100,0\n100,0\n100,0\n100,0\n100,0\n100,0\n100,0\n\n\nTabela nutricional\n100,0\n100,0\n100,0\n100,0\n100,0\n100,0\n100,0\n\n\nConformidade da tabela nutricional\n100,0\n75,0\n66,7\n90,0\n25,0\n0,0\n92,9\n\n\nLista de ingredientes\n100,0\n100,0\n100,0\n90,0\n100,0\n100,0\n100,0\n\n\nDeclaração sobre glúten\n100,0\n100,0\n100,0\n100,0\n100,0\n100,0\n100,0\n\n\nSelo de inspeção\n100,0\n100,0\n100,0\n100,0\n100,0\n100,0\n100,0\n\n\nOrientação de armazenamento\n100,0\n100,0\n100,0\n100,0\n100,0\n100,0\n100,0\n\n\n\nNota. Valores em % de produtos conformes dentro de cada subgrupo (células em branco excluídas)."
+  },
+  {
+    "objectID": "conformidade.html#mapa-produto-item",
+    "href": "conformidade.html#mapa-produto-item",
+    "title": "2 · Conformidade da rotulagem",
+    "section": "Mapa produto × item",
+    "text": "Mapa produto × item\n\n\n\n\n\n\n\n\nFigura 5: Conformidade por produto e item. Verde = conforme/presente; vermelho = não; cinza = sem informação."
+  },
+  {
+    "objectID": "conformidade.html#produtos-com-algum-item-não-conforme",
+    "href": "conformidade.html#produtos-com-algum-item-não-conforme",
+    "title": "2 · Conformidade da rotulagem",
+    "section": "Produtos com algum item não conforme",
+    "text": "Produtos com algum item não conforme\n\n\n\n\nTabela 6: Produtos com ao menos um item não conforme.\n\n\n\n\n\n\n\n\n\nID\nMarca/empresa\nProduto\nSubgrupo\nItens não conformes\nNº\n\n\n\n\nP033\nM11\nCarne do sol\nSalgado\nConformidade da tabela nutricional, Lista de ingredientes\n2\n\n\nP013\nM04\nSalsicha Polonia\nEmulsionado\nConformidade da tabela nutricional\n1\n\n\nP014\nM04\nSalsicha Pernil\nEmulsionado\nConformidade da tabela nutricional\n1\n\n\nP029\nM08\nCharque\nSalgado e dessecado\nConformidade da tabela nutricional\n1\n\n\nP030\nM09\nCostela suina salgada e defumada\nSalgado e defumado\nConformidade da tabela nutricional\n1\n\n\nP031\nM09\nLinguiça suína apimentada\nLinguiça\nConformidade da tabela nutricional\n1\n\n\nP039\nM13\nCordeiro temperado\nTemperado\nConformidade da tabela nutricional\n1\n\n\nP047\nM09\nPernil suino salgado e defumado\nSalgado e defumado\nConformidade da tabela nutricional\n1\n\n\nP048\nM09\nPe suino salgado e defumado\nSalgado e defumado\nConformidade da tabela nutricional\n1\n\n\n\nNota. 9 de 48 produtos."
+  }
+]
