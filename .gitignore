@@ -16,3 +16,6 @@ relatorio/*.qmd
 relatorio/R/
 relatorio/_quarto.yml
 relatorio/*.py
+
+# Arquivos Markdown ficam só no computador
+*.md
