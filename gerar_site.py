@@ -156,7 +156,9 @@ rotulo();
 def monta() -> str:
     nav = ['<nav><div class="titulo">Rotulagem de produtos cárneos</div>',
            '<button id="tema" type="button"></button>',
-           '<a href="#inicio" data-id="inicio">Início</a>']
+           '<a href="#inicio" data-id="inicio">Início</a>',
+           '<h3>Análises estatísticas</h3>',
+           '<a href="r/index.html">Relatório em R (Quarto) ↗</a>']
     paginas = []
     cartoes = []
     for grupo, itens in MENU.items():
@@ -174,6 +176,8 @@ def monta() -> str:
               "<p>Resultados da análise descritiva da rotulagem e da composição de produtos cárneos "
               "comercializados na Bahia. Escolha uma variável no menu à esquerda para ver as figuras "
               "e as tabelas correspondentes.</p>"
+              '<p>As análises estatísticas feitas em R estão no '
+              '<a href="r/index.html">relatório em Quarto</a>.</p>'
               f'<div class="grade">{"".join(cartoes)}</div></section>')
 
     return ('<!doctype html><html lang="pt-BR"><head><meta charset="utf-8">'

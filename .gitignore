@@ -3,3 +3,10 @@ __pycache__/
 .venv/
 *.xlsx
 figuras/*.html
+
+relatorio/_saida/
+relatorio/.quarto/
+*_files/
+*.knit.md
+
+relatorio/.Renviron
