@@ -10,3 +10,9 @@ relatorio/.quarto/
 *.knit.md
 
 relatorio/.Renviron
+
+# Código do relatório Quarto: fica só no computador (decisão do pesquisador)
+relatorio/*.qmd
+relatorio/R/
+relatorio/_quarto.yml
+relatorio/*.py
