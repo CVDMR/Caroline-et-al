@@ -6,7 +6,7 @@ figuras/*.html
 
 relatorio/_saida/
 relatorio/.quarto/
-*_files/
+/relatorio/*_files/
 *.knit.md
 
 relatorio/.Renviron
